@@ -3,7 +3,8 @@ const searchTerm = document.querySelector(".searchTerm")
 const movieList = document.getElementById("display-movie-list")
 const searchButton = document.querySelector(".searchButton")
 let searchInput
-let movies = []
+let favMovies = []
+let movie = {}
 
 
 
@@ -16,6 +17,7 @@ movieList.innerHTML =
   `
 
 searchTerm.addEventListener("keyup", (e) => {
+  e.preventDefault()
    searchInput = e.target.value.toLowerCase()
   console.log(searchInput)
   /*filteredMovies = movieSearch.filter(movie => {
@@ -49,19 +51,21 @@ searchButton.addEventListener("click", getTitle)
            <div class="movie-card score"><img src="imgs/star-score.png"> ${movie.imdbRating} </div>
            <div class="movie-card runtime"> ${movie.Runtime} </div>
            <div class="movie-card genre"> ${movie.Genre} </div>
-           <div class="movie-card watchlist-btn"><a href= "javascript: getBusy()"><img src="imgs/watchlist-btn.png"></a> watchlist </div>
+           <div class="movie-card watchlist-btn"><a href= "javascript: getWatchlist(movie)"><img src="imgs/watchlist-btn.png"></a> watchlist </div>
            <div class="movie-card plot"> ${movie.Plot} </div>
         </div>
              <hr>
 
          `
-
-       }))
+        }))
 
       document.querySelector(".initialScreen").style.display = "none"
 
       }
 
-      function getBusy(){
-        alert("get busy")
-      }
+      function getWatchlist(movie) {
+        console.log( `${movie.imdbID}`)
+        console.log(`${movie}`)
+        favMovies.push(`${movie}`)
+        console.log(localStorage.setItem("favMovies", JSON.stringify(favMovies)))
+        }

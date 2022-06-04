@@ -22,6 +22,25 @@
    <button type="submit" class="searchButton">Search</button>
    </div>
   <div id = "display-movie-list"></div>
-<script type="text/javascript" src="js/main.js"></script>
+<script>
+
+   const favMovies  = JSON.parse(localStorage.getItem("favMovies"))
+   console.log(favMovies)
+    let cardMovie
+   favMovies.map(movie => {
+   cardMovie = `
+    <div class = "movies">
+       <div class="movie-card poster"><img src= "${movie.Poster}"></div>
+       <div class="movie-card title"> ${movie.Title} </div>
+       <div class="movie-card score"><img src="imgs/star-score.png"> ${movie.imdbRating} </div>
+       <div class="movie-card runtime"> ${movie.Runtime} </div>
+       <div class="movie-card genre"> ${movie.Genre} </div>
+       <div class="movie-card plot"> ${movie.Plot} </div>
+    </div>
+         <hr>
+       `
+  })
+  document.getElementById("display-movie-list").innerHTML += cardMovie
+</script>
 </body>
 </html>
