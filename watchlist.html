@@ -24,9 +24,11 @@
   <div id = "display-movie-list"></div>
 <script>
 
-   const favMovies  = JSON.parse(localStorage.getItem("favMovies"))
+   const favMovies = JSON.parse(localStorage.getItem("favMovies"))
+     window.onload = () => { JSON.parse(localStorage.getItem("favMovies"))
    console.log(favMovies)
     let cardMovie
+    let movie
    favMovies.map(movie => {
    cardMovie = `
     <div class = "movies">
@@ -35,12 +37,21 @@
        <div class="movie-card score"><img src="imgs/star-score.png"> ${movie.imdbRating} </div>
        <div class="movie-card runtime"> ${movie.Runtime} </div>
        <div class="movie-card genre"> ${movie.Genre} </div>
+       <div class="movie-card watchlist-btn"><a id="link" href="#" onclick ="javascript: removeFromWatchlist(); return false;"><img src="imgs/remove-icon.png"></a> Remove </div>
        <div class="movie-card plot"> ${movie.Plot} </div>
     </div>
          <hr>
        `
+       document.getElementById("display-movie-list").innerHTML += cardMovie
+
   })
-  document.getElementById("display-movie-list").innerHTML += cardMovie
+}
+
+function removeFromWatchlist(){
+  localStorage.removeItem("favMovies");
+  console.log("btn pressed")
+}
+
 </script>
 </body>
 </html>
