@@ -48,7 +48,7 @@ searchButton.addEventListener("click", getTitle)
       }
 
       function getMovieCard() {
-         movies.map(movie => fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=ea2329ec`)
+         movies.map(movie => fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=ea2329ec`)
         .then(r => r.json())
         .then(movie => {
           console.log(movie)
@@ -93,7 +93,7 @@ searchButton.addEventListener("click", getTitle)
 
        async function getWatchlist() {
 
-                let result = await fetch(`http://www.omdbapi.com/?i=${movieID}&apikey=ea2329ec`)
+                let result = await fetch(`https://www.omdbapi.com/?i=${movieID}&apikey=ea2329ec`)
                 .then(r=> r.json())
                 .then(result => {
                   favMovies.push(result)
