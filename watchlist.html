@@ -24,13 +24,26 @@
   <div id = "display-movie-list"></div>
 
 <script>
+
+
+
+
   let movieID
   let cardMovie
-  const movieList = document.getElementById("display-movie-list")
 
-   const favMovies = JSON.parse(localStorage.getItem("favMovies"))
-     window.onload = () => { JSON.parse(localStorage.getItem("favMovies"))
-   console.log(favMovies)
+  const movieList = document.getElementById("display-movie-list")
+  const favMovies = JSON.parse(localStorage.getItem("favMovies"))
+    window.onload = () => { JSON.parse(localStorage.getItem("favMovies"))
+  console.log(favMovies)
+
+
+  if (favMovies.length === 0) {
+    movieList.innerHTML =
+     `<div style = "margin: 60px auto;font-size: 20px;text-align: center"
+     <p> Start looking for a movie to add</p><a href="index.html"><img src = "imgs/watchlist-btn.png"></a>
+     </div>
+     `
+  } else {
 
 
    favMovies.map(movie => {
@@ -62,29 +75,23 @@
    runtime.textContent =`${movie.Runtime}`
    score.innerHTML = `<img src=" imgs/star-score.png"> ${movie.imdbRating}`
 
-     document.getElementById(movie.imdbID).onclick = function(){
+     document.getElementById(movie.imdbID).onclick = function(e){
+       console.log(e)
        wrapper.innerHTML = ""
-       localStorage.removeItem("object");
+       const indexOfObject = favMovies.findIndex(object => {
+       return object.id === movie.imdbID;
+     });
+         console.log(indexOfObject);
+         favMovies.splice(indexOfObject, 1);
+         localStorage.setItem('favMovies', JSON.stringify(favMovies));
+
      }
-     /*addEventListener("click", function test(e) {
-       console.log(e.target.id)
-       movieID = e.target.id
-       */
-
-     })
-
-
+   })
+}
 }
 
- /*function removeFromWatchlist(){
 
-  if(movieID){
-    document.getElementById(movie.imdbID).innerHTML = ""
-    localStorage.removeItem("favMovies[].movieTitle");
-    console.log("btn pressed")
-  }
 
-}*/
 
 </script>
 </body>

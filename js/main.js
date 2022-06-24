@@ -95,9 +95,9 @@ searchButton.addEventListener("click", getTitle)
 
                 let result = await fetch(`http://www.omdbapi.com/?i=${movieID}&apikey=ea2329ec`)
                 .then(r=> r.json())
-                .then(object => {
-                favMovies.push(result)
-                console.log(result)
-                  localStorage.setItem("object", JSON.stringify(favMovies))
+                .then(result => {
+                  favMovies.push(result)
+                  console.log(result)
+                localStorage.setItem("favMovies", JSON.stringify(favMovies))
       })
     }
