@@ -33,7 +33,7 @@ searchButton.addEventListener("click", getTitle)
 
   async function getTitle() {
         movieList.innerHTML = ""
-    let data = await fetch(`http://www.omdbapi.com/?s=${searchInput}&apikey=ea2329ec`)
+    let data = await fetch(`https://www.omdbapi.com/?s=${searchInput}&apikey=ea2329ec`)
       .then(res=> res.json())
       .then(data => {
         movies = data.Search
