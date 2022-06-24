@@ -32,7 +32,7 @@ searchButton.addEventListener("click", getTitle)
 
 
   async function getTitle() {
-        movieList.innerHTML =""
+        movieList.innerHTML = ""
     let data = await fetch(`http://www.omdbapi.com/?s=${searchInput}&apikey=ea2329ec`)
       .then(res=> res.json())
       .then(data => {
@@ -52,38 +52,52 @@ searchButton.addEventListener("click", getTitle)
         .then(r => r.json())
         .then(movie => {
           console.log(movie)
+          const wrapper = document.createElement("div")
+          wrapper.classList.add("movies")
+          const poster = document.createElement("div")
+          poster.classList.add("movie-card", "poster")
+          const title = document.createElement("div")
+          title.classList.add("movie-card", "title")
+          const score = document.createElement("div")
+          score.classList.add("movie-card", "score")
+          const runtime = document.createElement("div")
+          runtime.classList.add("movie-card", "runtime")
+          const genre = document.createElement("div")
+          genre.classList.add("movie-card", "genre")
+          const watchlist = document.createElement("div")
+          watchlist.classList.add("movie-card", "watchlist-btn")
+          const plot = document.createElement("div")
+          plot.classList.add("movie-card", "plot")
+          wrapper.append(poster, title, score, runtime, genre, watchlist, plot)
+          movieList.append(wrapper)
+          const posterImage = document.createElement('img');
+          poster.append(posterImage)
+          posterImage.setAttribute('src', `${movie.Poster}`);
+          plot.textContent =`${movie.Plot}`
+          watchlist.innerHTML =`<img id= "${movie.imdbID}"  src="imgs/watchlist-btn.png" >watchlist`
+          title.textContent =`${movie.Title}`
+          genre.textContent =`${movie.Genre}`
+          runtime.textContent =`${movie.Runtime}`
+          score.innerHTML = `<img src=" imgs/star-score.png"> ${movie.imdbRating}`
 
-           movieList.innerHTML += `
-        <div class = "movies">
-           <div class="movie-card poster"><img src= "${movie.Poster}"></div>
-           <div class="movie-card title"> ${movie.Title} </div>
-           <div class="movie-card score"><img src="imgs/star-score.png"> ${movie.imdbRating} </div>
-           <div class="movie-card runtime"> ${movie.Runtime} </div>
-           <div class="movie-card genre"> ${movie.Genre} </div>
-           <div class="movie-card watchlist-btn"><a id="link" href="#" onclick ="javascript: getWatchlist(movieID); return false;"><img src="imgs/watchlist-btn.png"></a> watchlist </div>
-           <div class="movie-card plot"> ${movie.Plot} </div>
-        </div>
-             <hr>
+            document.getElementById(movie.imdbID).addEventListener("click", function test(e) {
+              console.log(e.target.id)
+              movieID = e.target.id
+              getWatchlist()
+            })
 
-         `
-         movieID = movie.imdbID
-         console.log(movieID)
-         return movieID
-       }))
-        //  document.querySelector(".initialScreen").style.display = "none"
-
-      }
-
-    //  document.getElementById("link").addEventListener("click", getWatchlist)
+         }))
+       }
 
 
-      function getWatchlist(movieID) {
-                console.log(movieID)
-                fetch(`http://www.omdbapi.com/?i=${movieID}&apikey=ea2329ec`)
+
+       async function getWatchlist() {
+
+                let result = await fetch(`http://www.omdbapi.com/?i=${movieID}&apikey=ea2329ec`)
                 .then(r=> r.json())
-                .then(data => {
-                  favMovies.push(data)
-                  console.log(data)
-                  localStorage.setItem("favMovies", JSON.stringify(favMovies))
-          })
-        }
+                .then(object => {
+                favMovies.push(result)
+                console.log(result)
+                  localStorage.setItem("object", JSON.stringify(favMovies))
+      })
+    }

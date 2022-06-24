@@ -22,35 +22,69 @@
    <button type="submit" class="searchButton">Search</button>
    </div>
   <div id = "display-movie-list"></div>
+
 <script>
+  let movieID
+  let cardMovie
+  const movieList = document.getElementById("display-movie-list")
 
    const favMovies = JSON.parse(localStorage.getItem("favMovies"))
      window.onload = () => { JSON.parse(localStorage.getItem("favMovies"))
    console.log(favMovies)
-    let cardMovie
-    let movie
+
+
    favMovies.map(movie => {
-   cardMovie = `
-    <div class = "movies">
-       <div class="movie-card poster"><img src= "${movie.Poster}"></div>
-       <div class="movie-card title"> ${movie.Title} </div>
-       <div class="movie-card score"><img src="imgs/star-score.png"> ${movie.imdbRating} </div>
-       <div class="movie-card runtime"> ${movie.Runtime} </div>
-       <div class="movie-card genre"> ${movie.Genre} </div>
-       <div class="movie-card watchlist-btn"><a id="link" href="#" onclick ="javascript: removeFromWatchlist(); return false;"><img src="imgs/remove-icon.png"></a> Remove </div>
-       <div class="movie-card plot"> ${movie.Plot} </div>
-    </div>
-         <hr>
-       `
-       document.getElementById("display-movie-list").innerHTML += cardMovie
+    const wrapper = document.createElement("div")
+   wrapper.classList.add("movies")
+   const poster = document.createElement("div")
+   poster.classList.add("movie-card", "poster")
+   const title = document.createElement("div")
+   title.classList.add("movie-card", "title")
+   const score = document.createElement("div")
+   score.classList.add("movie-card", "score")
+   const runtime = document.createElement("div")
+   runtime.classList.add("movie-card", "runtime")
+   const genre = document.createElement("div")
+   genre.classList.add("movie-card", "genre")
+   const watchlist = document.createElement("div")
+   watchlist.classList.add("movie-card", "watchlist-btn")
+   const plot = document.createElement("div")
+   plot.classList.add("movie-card", "plot")
+   wrapper.append(poster, title, score, runtime, genre, watchlist, plot)
+   movieList.append(wrapper)
+   const posterImage = document.createElement('img');
+   poster.append(posterImage)
+   posterImage.setAttribute('src', `${movie.Poster}`);
+   plot.textContent =`${movie.Plot}`
+   watchlist.innerHTML =`<img id= "${movie.imdbID}"  src="imgs/remove-icon.png" >watchlist`
+   title.textContent =`${movie.Title}`
+   genre.textContent =`${movie.Genre}`
+   runtime.textContent =`${movie.Runtime}`
+   score.innerHTML = `<img src=" imgs/star-score.png"> ${movie.imdbRating}`
 
-  })
+     document.getElementById(movie.imdbID).onclick = function(){
+       wrapper.innerHTML = ""
+       localStorage.removeItem("object");
+     }
+     /*addEventListener("click", function test(e) {
+       console.log(e.target.id)
+       movieID = e.target.id
+       */
+
+     })
+
+
 }
 
-function removeFromWatchlist(){
-  localStorage.removeItem("favMovies");
-  console.log("btn pressed")
-}
+ /*function removeFromWatchlist(){
+
+  if(movieID){
+    document.getElementById(movie.imdbID).innerHTML = ""
+    localStorage.removeItem("favMovies[].movieTitle");
+    console.log("btn pressed")
+  }
+
+}*/
 
 </script>
 </body>
