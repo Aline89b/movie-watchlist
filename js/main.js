@@ -82,8 +82,10 @@ searchButton.addEventListener("click", getTitle)
 
             document.getElementById(movie.imdbID).addEventListener("click", function test(e) {
               console.log(e.target.id)
+              
               movieID = e.target.id
               getWatchlist()
+              watchlist.innerHTML = `<img id= "${movie.imdbID}"  src="imgs/icon-done.png" > Added`
             })
 
          }))
