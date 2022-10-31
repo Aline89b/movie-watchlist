@@ -53,7 +53,7 @@ searchButton.addEventListener("click", getTitle)
         .then(movie => {
           console.log(movie)
           const wrapper = document.createElement("div")
-          wrapper.classList.add("movies")
+          wrapper.classList.add( "movies")
           const poster = document.createElement("div")
           poster.classList.add("movie-card", "poster")
           const title = document.createElement("div")
@@ -73,6 +73,7 @@ searchButton.addEventListener("click", getTitle)
           const posterImage = document.createElement('img');
           poster.append(posterImage)
           posterImage.setAttribute('src', `${movie.Poster}`);
+          //poster.style.background = url(posterImage)
           plot.textContent =`${movie.Plot}`
           watchlist.innerHTML =`<img id= "${movie.imdbID}"  src="imgs/watchlist-btn.png" >watchlist`
           title.textContent =`${movie.Title}`

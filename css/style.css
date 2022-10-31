@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
-
-header {
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.container-fluid {
   display: flex;
   position: relative;
   justify-content: space-around;
@@ -13,13 +17,13 @@ h1 {
   font-family: "Inter", sans-serif;
   font-size: 43px;
   font-weight: 800;
-  line-height: 24px;
+  line-height: 2em;
   letter-spacing: -0.045em;
 
 }
 
 h3 {
-font-family: "Inter", sans-serif;
+
 font-size: 14px;
 font-weight: 700;
 line-height: 20px;
@@ -36,37 +40,50 @@ letter-spacing: 0em;
 .search-bar {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  display: flex;
   align-items: center;
   padding: .2em;
-  height: auto;
-  left: 38%;
-  
+  max-width: fit-content;
+  margin: 0 auto;
   background: #FFFFFF;
   border: 1px solid #D1D5DB;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   border-radius: 6px;
-  display: flex;
-  justify-content: space-between;
   border: 1px solid black;
-  position: absolute;
+  font-size: 1.1rem;
+  margin-bottom: 2em;
 
 }
 form {
   display: flex;
+  flex: auto;
+  min-width: 0;
+  justify-content: space-around;
+  align-items: center;
 }
+
+.material-icons {
+  flex: none;
+  
+  }
+
 .searchTerm, .searchButton{
 all: unset;
+flex: auto;
+min-width: 0;
 
 }
+
+
 .searchButton {
-  margin-right: 1.5em;
-  font-family: Inter;
-  font-size: 14px;
-  font-weight: 500;
+ flex: none;
+  font-size: 1.2rem;
+  font-weight: bold;
   line-height: 20px;
   letter-spacing: 0em;
   text-align: left;
   cursor:pointer;
+  
 }
 
 .initialScreen {
@@ -81,84 +98,80 @@ all: unset;
   font-size: 18px;
 }
 
-#display-movie-list {
+#display-movie-list{
   display: flex;
   flex-direction: column;
   padding: 10px;
+  gap: 3.5rem;
 
 }
 
 .movies {
   display:grid;
-  margin-top: 50px;
-  grid-template-columns: repeat(4,1fr);
-  grid-template-rows: 100px 100px 200px;
+  max-width: 1200px;
+  grid-template-columns: repeat(autofill,1fr);
+  grid-template-rows: 4rem 4rem 9rem;
   grid-template-areas:
-    "poster title score ..."
-    "poster runtime genre watchlist"
+    "poster title score runtime"
+    "poster ...  genre watchlist"
     "poster plot plot plot"
 }
 
 .poster {
   grid-area: poster;
-  margin: auto;
-  max-width: fit-content;
-  object-fit: cover;
+  
+  
   }
 
-  img {
+  .poster img {
     max-width: 100%;
-    max-height: 100%;
+    max-height: 17rem;
     
   }
 
 
 .title {
   grid-area: title;
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
+   font-size: 1.2rem;
   font-weight: 200;
-  line-height: 10px;
+  margin-left: .4em;
   letter-spacing: 0em;
-  padding: 10px;
+  
 
 }
 
 .score {
   grid-area: score;
-  padding: 8px;
+  
 }
 
 .runtime {
   grid-area: runtime;
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
+  
+  font-size: 1.2rem;
   font-weight: 200;
   line-height: 20px;
   letter-spacing: 0em;
   text-align: left;
-  margin-top: -21%;
-  padding:10px;
+  
 }
 
 .genre {
   grid-area: genre;
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
+  
+  font-size: 1.2rem;
   font-weight: 200;
   line-height: 20px;
   letter-spacing: 0em;
   text-align: left;
-  margin-top: -20%;
-  padding:10px;
+  
 }
 
 .watchlist-btn {
   grid-area: watchlist;
   display: flex;
   justify-content: flex-end;
-  margin-top: -18.5%;
-  padding:10px;
+  
 }
 
 .watchlist-btn img {
@@ -171,8 +184,7 @@ all: unset;
 .plot {
   grid-area: plot;
   padding: 10px;
-  font-family: "Inter", sans-serif;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 200;
   line-height: 20px;
   letter-spacing: 0em;
@@ -186,28 +198,46 @@ hr {
   color: black;
 }
 
-@media screen and (max-width: 480px) {
-   .search-bar {
-    margin: -3em -4.8em 4em;
+
+@media screen and (max-width: 680px) {
+  .movies {
+    display:grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(autofill, 1fr);
+    
+    grid-template-areas:
+      "poster title score runtime"
+      "poster genre watchlist "
+      "poster plot plot"
   }
-    
-    img {
-        margin: 0 auto;
-      }
+  .title {
+    margin-left: 0;
+  }
+}  
 
-     }
+@media screen and (max-width: 580px) {
+  
+.movies {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 4rem;
+   
+    grid-template-areas:
+        "poster poster poster"
+        "poster poster poster"
+        "title score runtime"
+        " genre watchlist ... "
+        " plot plot plot";
+}
+
+  }
+ 
 
     
 
-     @media screen and (min-width: 480px ) {
     
-     .runtime {
-        margin-left: 2em;
-     }
-     .plot {
-      margin-left: 2em;
-     }
-    }
 
     
        
